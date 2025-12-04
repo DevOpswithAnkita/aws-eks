@@ -478,6 +478,7 @@ spec:
 - A human running: kubectl drain <node>
 
 **PDB ensures your application always has enough pods running, so the service does not go down.**
+
 ---
 
 ### Q5: What is IAM Roles for Service Accounts (IRSA)?
@@ -611,7 +612,6 @@ kubectl top pods
 ```bash
 kubectl exec -it <pod-name> -- /bin/bash
 ```
-
 ---
 
 ### Q10: Your EKS application needs to access S3. What's the best approach?
@@ -630,7 +630,7 @@ Use **IRSA (IAM Roles for Service Accounts)** - it's the most secure method.
 - Node IAM role: Too broad, all pods get access
 - Hardcoded credentials: Security risk, rotation issues
 - IRSA: Pod-level permissions, automatic credential rotation
-
+  
 ---
 
 ### Q11: How would you handle a sudden traffic spike in your EKS application?
@@ -711,7 +711,6 @@ An **OIDC Provider (OpenID Connect Provider)** in EKS is an identity service tha
 
 It allows AWS IAM to trust Kubernetes service accounts so that pods can securely assume IAM roles **without using access keys**.
 
----
 
 **Why Do We Need OIDC?**
 
@@ -729,7 +728,6 @@ IRSA allows Kubernetes pods to access AWS services securely:
 
 All this happens **without storing AWS credentials** inside containers.
 
----
 
 **What Does an OIDC Provider Do?**
 
@@ -738,7 +736,7 @@ All this happens **without storing AWS credentials** inside containers.
 - Allows IAM roles to trust Kubernetes  
 - Enables pods to assume IAM roles securely  
 
----
+
 
 **Command to Enable OIDC Provider**
 
@@ -747,6 +745,7 @@ eksctl utils associate-iam-oidc-provider \
   --cluster <cluster-name> \
   --approve
 ```
+---
 
 ### Q14: How Do You Configure Monitoring in EKS?
 
@@ -755,7 +754,6 @@ Monitoring in EKS has two major parts:
 1. **Control Plane Monitoring (CloudWatch Logs)**
 2. **Worker Node and Pod Monitoring (Prometheus + Grafana)**
 
----
 
 **2.1 Control Plane Monitoring (CloudWatch)**
 
@@ -813,11 +811,14 @@ Install using Helm:
     - API server metrics
     - Cluster health
     - Workload status
+---
 
 ### Q15: What are the prerequisites for setting up and managing an EKS cluster?
 - kubectl – Command-line tool for interacting with Kubernetes clusters.
 - eksctl – CLI tool that simplifies creation and management of EKS clusters.
 - AWS CLI – Command-line tool for working with AWS services; used to configure AWS credentials and interact with EKS and related resources.
+
+---
 
 ### Q16: How do you set up an AWS Application Load Balancer (ALB) on an EKS cluster using the AWS Load Balancer Controller?
 
@@ -882,6 +883,8 @@ kubectl logs -n kube-system deployment/aws-load-balancer-controller
 *Note*
 - Managed Kubernetes (EKS) → Use AWS Load Balancer Controller (AWS-specific Ingress Controller with ALBs). 
 - Self-managed Kubernetes → Use generic Ingress Controller (NGINX, Traefik, etc.) and optionally a LoadBalancer solution.
+
+---
 
 ## Scenario-Based Questions
 
@@ -1123,5 +1126,5 @@ kubectl describe pod <pod-name>
 # View logs
 kubectl logs <pod-name> -f
 ```
-
+---
 
